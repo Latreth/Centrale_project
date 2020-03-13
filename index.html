@@ -79,9 +79,7 @@
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                                 <li class=" smooth-menu active"></li>
                                 <li class=" smooth-menu"><a href="#machine_learning">Machine Learning pour la Sécurité</a></li>
-                                <li class="smooth-menu"><a href="secu.html">La sécurité pour le Machine Learning</a></li>
-                                <li class="smooth-menu"><a href="#conteneur">Conteneurs</a></li>
-                                <li class="smooth-menu"><a href="#unikernel">Unikernel</a></li>
+                                <li class="smooth-menu"><a href="#secu">La Sécurité du Machine Learning</a></li>
                                 <!--			                    <li class="smooth-menu"><a href="#portfolio">portfolio</a></li>-->
                                 <!--			                    <li class="smooth-menu"><a href="#clients">clients</a></li>-->
                                 <!--			                    <li class="smooth-menu"><a href="#contact">contact</a></li>-->
@@ -289,68 +287,76 @@
                 </div>
                 </section><!--/.about-->
 
-        <section id="sm" class="about">
+        <section id="secu" class="about">
             <div class="section-heading text-center">
                 <h2>La sécurité des systèmes de Machine Learning</h2>
             </div>
             <div class="container">
                 <div class="about-content">
                     <div class="row">
+                        <div>
+                            Il existe 3 grandes différentes classes d'attaques sur les systèmes de Machine Learnings. Ces 3 grandes classes sont reprises dans ce qui suit. Il s'agit des sujets les plus actuels de recherches. </br></br>
+                        </div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="section-heading text-center">
+                <h2>I./ Model Stealing</h2>
+            </div>
+	    <div class="container">
+                <div class="about-content">
+                    <div class="row">
+			<div>
+				Le Model Stealing, sur un modèle de Machine Learning, est l'ensemble des techniques utilisés pour reconstituer le modèle, ou des informations à propos des données utilisés durant la phase d’entraînement. En terme de Privacy, cela présente de gros problème de sécurité si de tels attaques était possible, mais surtout possible et probante dans la réalité. Prenons par exemple un hôpital qui souhaite construire un modèle de Machine Learning capable de faire de la détection de cancer. Pour cela, il utilise pour entraîner son modèle, les données à disposition dans l'hôpital, à savoir les données personnels de patients, avec leurs consentement. Mais si un attaquant est capable de reconstituer ces données, alors la vie privée de ces patients est révélée. On peut de même imaginer un bot qui étudie le comportement extra-conjugual, etc.  </br> </br>
+			</div>
+			<div>
+				Il existe un papier, nommé <a href="https://arxiv.org/pdf/1610.05820.pdf" style="color:#FF0000;"> Membership Inference Attack against Machine Learning Models</a>, qui présente une attaque de ce type, à savoir retrouver à partir d'une donnée isolée (record), savoir si ce dernier à été utiliser au sein du jeu de données d'entraînement (training set) du système attaqué. Pour ce faire, ils construisent un système d'attaque à base de copie du modèle attaqué (les shadows models). Ces derniers sont entrainés sur des données qui se veulent les plus proches possibles du jeu d'entraînement, via les connaissances du jeu de données qu'est susceptible d'avoir l'attaquant (par exemple, pour l'hopital, la liste de l'ensemble de tout les patients). Une fois entraîner, l'ensemble de ces shadows models vont se voir attribuer des jeux de données à classer, labeler 'in' ou 'out' selon si ces derniers était dans leur jeu d'entrainement ou non. Les données en sortie, classés et labelés, sotn ensuite utilisé comme données d'entraînement pour construire le système d'attaque. Tout ceci est repris dans le système présenté en <a href="#fig1" style="color:#FF0000;"> Figure 1 </a>. </br> </br>
+			</div>
+			<div>
+				Il s'agit la d'un exemple de papier qui présente une attaque répondant au problème de Membership Inference. Mais dans ce papier, nommé <a href= "https://arxiv.org/pdf/1708.06145.pdf" style="color:#FF0000;"> Knock Knock, Who's There ?</a>, en plus de formaliser de manière plus classique le problème, à la manière d'un jeu à résoudre comme sont présentés les jeux cryptographique classique de sécurité, qui présente une attaque sur des agrégats de localisation. 
+			</div>
                         <div style="text-align: center">
                             <figure>
                             <img
-                            src="assets/images/site/virtualisation-eps-converted-to.pdf"
+                            src="assets/images/site/Shadow_model.png"
                             height="300px"
-                            width="300px"
+                            width="900px"
+			    id="fig1"
                             />
-                            <figcaption> Figure 1: La virtualisation</figcaption>
-</figure> </br>
+                            <figcaption> Figure 1: Shadow Model Attack </figcaption> </br>
+			    </figure>
                         </div>
 
                         <div>
-                            Un ordinateur utilisable est constitué de son hardware, son système d'exploitation (OS) et on utilise ensuite une application sur notre ordinateur. Avant la virtualisation des data centers il fallait donc <i> n </i> ordinateurs pour <i> n </i> personnes comme on peut le voir sur la Figure 1. La virtualisation est donc devenu un élément essentiel pour les data centers et le cloud car elle permet d'utilisé un seul ordinateur pour plusieurs personnes.
+                            Le problème de Membership Inference n'est de plus, qu'un problème parmis l'ensemble des problèmes qui sont inclus dans la classe de Model Stealing. Ce sont les problèmes de privacy et sécurité parmis les plus importants, car alors un attaquant est capable de reconstituer entièrement ce qu'a employés le défenseur. Un autre problème dans cette classe de problème, serait celui de reconstituer au sein d'un réseau de neurones les différentes valeurs des liens entre les neurones, reconstituant ainsi le modèle complètement. (Cela permettrait notamment de pouvoir diffuser un modèle qui répond de manière identique au utilisateurs, mais avec un système de 'backdoor', qui permettent un attaquant de faire des choses non prévus par le bot initial.)</br></br>
                         </div>
-                    </br> </br>
-                        <div style="text-align: center">
-                            <figure>
-                            <img
-                            src="assets/images/site/typehyperviseur.jpg"
-                            height="300px"
-                            width="300px"
-                            />
-                            <figcaption> Figure 2: Les deux types d'hyperviseur </figcaption> </br>
-</figure>
-                        </div>
-
-                        <div>
-                            Un hyperviseur est une plate-forme de virtualisation qui permet à plusieurs systèmes d'exploitations de fonctionner simultanément sur une même machine physique.
-                            <br/>
-                            Il existe deux types d'hyperviseur:
-                            <br/>
-                            <ul style="list-style: inside; padding-left: 60px;">
-                                <li style="list-style: inside;"> Un hyperviseur de type 1:  C'est un noyau hôte allégé et optimisé. Il s'exécute directement sur le hardware et permet d'avoir de très bonnes performances. Xen et KVM sont des hyperviseurs de type 1.</li>
-                                <br/>
-                                <li style="list-style: inside; "> Un hyperviseur de type 2: C'est un logiciel qui s'exécute à l'intérieur d'un autre système d'exploitation. Cette surcouche va entrainer une perte de performance mais peut être pratique pour des tests. VirtuBox et  VMware Fusion sont des hyperviseurs de type 2.</li>
-                            </ul>
-                        </div>
-
-
-                        <div style="text-align: center">
-                            <figure>
-                            <img
-                            src="assets/images/site/gaspillage-eps-converted-to.pdf"
-                            height="300px"
-                            width="300px"
-                            />
-                            <figcaption> Figure 3: Différence entre la puissance alloué et utilisé </figcaption> </br>
-</figure>
-                        </div>
-
-                        <div>
-                            En allouant plusieurs machines virtuelles on économise de l'énergie mais ce n'est pas suffisant. Comme on peut le voir sur la Figure 3 les data centers réservent un certain pourcentage de calcul à une machine virtuelle mais en réalité cette réserve n'est jamais utilisée à 100% et ainsi on perd énormément d'énergie. Par exemple si on reserve deux processeurs à une personne mais que cette personne utilise seulement un processeur alors le second est allumé et consome de l'énergie même si il est inutile.
-                        </div>
-
-
+                 </div>
+                </div>
+            </div>
+	    <div class="section-heading text-center">
+                <h2>II./ Data Poisoning Attacks</h2>
+            </div>
+	    <div class="container">
+                <div class="about-content">
+                    <div class="row">
+			<div>
+				Dans cette classe, on ne cherche plus à reconstituer le modèle employés par notre cible, mais à altérer ses réponses de manières permanentes, et ce pour l'ensemble des utilisateurs. Parmis les attaques de Data Poisoning, on peut distinguer deux types générales d'attaques. </br></br>
+			</div>
+			<div style="text-align: center">
+				<h3>Attaque visant l'intégrité du système de Machine Learning</h3>
+			</div>
+			<div style="text-align: center">
+				<h3>Attaque visant la disponibilité du système de Machine Learning</h3>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="section-heading text-center">
+                <h2>III./ Adverserial Attacks</h2>
+            </div>
+	    <div class="container">
+                <div class="about-content">
+                    <div class="row">
                         <div style="text-align: center">
                             <figure>
                             <img
@@ -359,16 +365,13 @@
                             width="900px"
                             />
                             <figcaption> Figure 4: Méthode pour économiser l'énergie </figcaption> </br>
-</figure>
+			    </figure>
                         </div>
 
                         <div>
                             La solution est donc les migrations de machines virtuelles. Lorsqu'on peut migrer plusieurs machine virtuelle comme sur la Figure 4 (b) et (c) on économise de l'énergie en mettant l'ordinateur P2 en pause ou même éteint.
                         </div>
-
-
-
-                    </div>
+                 </div>
                 </div>
             </div>
         </section>
